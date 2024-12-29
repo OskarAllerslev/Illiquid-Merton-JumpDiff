@@ -1,0 +1,246 @@
+---
+title: "Strategy"
+author: "Oskar Allerslev"
+date: "2024-12-29"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+# Strategy
+
+We assume that under the risk-neutral measure $\mathbb{Q}$, the underlying price $S_t$ follows;
+
+$$
+\begin{align*}
+dS_t = S_t(r-q-\lambda \kappa)dt + S_t \sigma dW_t + S_{t-}(e^Y-1)dN_t
+\end{align*}
+$$
+Where $r$ is the risk free rate. $q$ the continious dividend. $\lambda$ is the intensity of the jumps. $Y$ is the jump size. And lastly $\kappa = E^{\mathbb{Q}}(e^Y-1)=e^{\mu_J +\frac{1}{2}\sigma_J^2}-1$.
+
+Under mertons model, we can write out the Europen Call option semi-analytically as:
+$$
+\begin{align*}
+C_{Merton}(S_0,K,T)=\sum_{k=0}^\infty e^{-\lambda T} \frac{(\lambda T)^k}{k!}C_{BS}(S_0 e^{k\mu_J^*}, K, T, r,q, \sigma_{eff}^2)
+\end{align*}
+$$
+
+
+```{r}
+
+library(quantmod)
+library(dplyr)
+library(purrr)
+library(fitdistrplus)
+library(tibble)
+source("optionchain.R")
+
+```
+
+
+
+# Example option chain
+
+```{r}
+options_df <- optionchain()
+print(options_df)
+
+```
+
+
+```{r}
+getSymbols("GERN", from="2019-01-01", to="2024-12-29")  
+prices <- Cl(GERN)
+
+#Compute daily log returns
+returns <- diff(log(prices))[-1]  
+print(returns)
+
+```
+
+# calibrate parameters for model 
+
+```{r}
+sd_ret <- sd(returns, na.rm = TRUE)
+threshold <- 3 * sd_ret
+
+jumps <- returns[abs(returns) > threshold]
+no_jumps <- returns[abs(returns) <= threshold]
+
+fit_jump <- fitdistrplus::fitdist(as.numeric(jumps), "norm")
+mu_jump <- fit_jump$estimate[1]
+sigma_jump <- fit_jump$estimate[2]
+
+lambda <- length(jumps)/length(returns)
+
+sigma <- sd(no_jumps, na.rm = TRUE)
+
+
+print(c(mu_jump, sigma_jump, "sd no jump" = sigma, "lambda" =lambda))
+
+
+
+```
+
+
+```{r}
+# Standard Black-Scholes (European) for a call:
+BS_call_price <- function(S, K, T, r, q=0, sigma) {
+  if(T <= 0) return(pmax(S - K, 0))
+  d1 <- (log(S/K) + (r - q + 0.5*sigma^2)*T)/(sigma*sqrt(T))
+  d2 <- d1 - sigma*sqrt(T)
+  call <- S*exp(-q*T)*pnorm(d1) - K*exp(-r*T)*pnorm(d2)
+  return(call)
+}
+
+# Merton's jump-diffusion call
+merton_call_price <- function(
+  S0, K, T, r, q, sigma,  # continuous vol
+  lambda, muJ, sigmaJ,    # jump intensity & jump dist parameters
+  max_terms=50
+) {
+  # Summation over k jumps
+  sumval <- 0
+  # e^-lambdaT factor
+  e_negLT <- exp(-lambda * T)
+  
+  for(k in 0:max_terms) {
+    # Poisson weight
+    w_k <- e_negLT * ((lambda*T)^k / factorial(k))
+    
+    # Shifted underlying for k jumps:
+    # Often: S_k = S0 * exp(k * muJ)
+    # Some references include correction factors (e.g. -0.5*sigmaJ^2*k),
+    # but let's keep the simpler standard form:
+    S_k <- S0 * exp(k * muJ)
+    
+    # Price a vanilla call using BS with the same sigma. 
+    # (In some derivations you modify sigma => but let's keep it simple.)
+    call_k <- BS_call_price(S_k, K, T, r, q, sigma)
+    
+    sumval <- sumval + w_k * call_k
+  }
+  
+  return(sumval)
+}
+
+```
+
+
+```{r}
+
+options_df <- optionchain()
+
+
+na.omit(optionchain())
+
+filtered <- options_df %>%
+  dplyr::filter(
+    expiration_date == as.Date("2025-01-17"),
+    bid != 0,
+    ask != 0
+  )
+# View the result
+print(filtered)
+
+```
+
+
+```{r}
+today <- as.Date("2024-12-29")
+expiry <- as.Date("2025-02-21")
+T_yr <- as.numeric(expiry - today)/365
+S0_gern <- as.numeric(last(prices))
+r <- 0.04
+q <- 0.00
+
+
+
+
+stock <- filtered %>%
+  mutate(
+    mid_price = (ask + bid)/2,
+    merton_theo = map_dbl(
+      strike,
+      ~ merton_call_price(
+        S0_gern, .x, T_yr, r, q,
+        sigma,
+        lambda,
+        mu_jump,
+        sigma_jump
+      )
+    ),
+    mispricing = mid_price - merton_theo
+  )
+
+
+
+mispriced <- data.frame(
+  ticker = stock$ticker,
+  expiration = stock$expiration_date,
+  type = stock$type,
+  strike = stock$strike,
+  ask = stock$ask,
+  bid = stock$bid,
+  mid_price = stock$mid_price,
+  model_theoretical = stock$merton_theo,
+  mispricing = stock$mispricing,
+  spread = stock$ask - stock$bid
+  
+)
+
+print(mispriced)
+
+
+```
+
+
+
+- **4.1 If You’re Bullish on GERN**
+
+Buy calls with negative mispricing (underpriced). 
+Or,Sell puts with positive mispricing (overpriced).
+
+But watch the potential for large margin requirements if you’re short puts without a hedge.
+
+- **4.2 If You’re Bearish on GERN**
+
+Buy puts with negative mispricing (cheap).
+Sell calls with positive mispricing (expensive).
+
+Again, short calls can have unlimited upside risk unless you do a covered call (own the underlying) or a call spread.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
