@@ -1,0 +1,970 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Strategy},
+  pdfauthor={Oskar Allerslev},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Strategy}
+\author{Oskar Allerslev}
+\date{2024-12-29}
+
+\begin{document}
+\maketitle
+
+\section{Strategy}\label{strategy}
+
+We assume that under the risk-neutral measure \(\mathbb{Q}\), the
+underlying price \(S_t\) follows;
+
+\[
+\begin{align*}
+dS_t = S_t(r-q-\lambda \kappa)dt + S_t \sigma dW_t + S_{t-}(e^Y-1)dN_t
+\end{align*}
+\] Where \(r\) is the risk free rate. \(q\) the continious dividend.
+\(\lambda\) is the intensity of the jumps. \(Y\) is the jump size. And
+lastly
+\(\kappa = E^{\mathbb{Q}}(e^Y-1)=e^{\mu_J +\frac{1}{2}\sigma_J^2}-1\).
+
+Under mertons model, we can write out the Europen Call option
+semi-analytically as: \[
+\begin{align*}
+C_{Merton}(S_0,K,T)=\sum_{k=0}^\infty e^{-\lambda T} \frac{(\lambda T)^k}{k!}C_{BS}(S_0 e^{k\mu_J^*}, K, T, r,q, \sigma_{eff}^2)
+\end{align*}
+\]
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(quantmod)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'quantmod' was built under R version 4.4.2
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: xts
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: zoo
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'zoo'
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:base':
+## 
+##     as.Date, as.Date.numeric
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: TTR
+\end{verbatim}
+
+\begin{verbatim}
+## Registered S3 method overwritten by 'quantmod':
+##   method            from
+##   as.zoo.data.frame zoo
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(dplyr)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'dplyr' was built under R version 4.4.2
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## ######################### Warning from 'xts' package ##########################
+## #                                                                             #
+## # The dplyr lag() function breaks how base R's lag() function is supposed to  #
+## # work, which breaks lag(my_xts). Calls to lag(my_xts) that you type or       #
+## # source() into this session won't work correctly.                            #
+## #                                                                             #
+## # Use stats::lag() to make sure you're not using dplyr::lag(), or you can add #
+## # conflictRules('dplyr', exclude = 'lag') to your .Rprofile to stop           #
+## # dplyr from breaking base R's lag() function.                                #
+## #                                                                             #
+## # Code in packages is not affected. It's protected by R's namespace mechanism #
+## # Set `options(xts.warn_dplyr_breaks_lag = FALSE)` to suppress this warning.  #
+## #                                                                             #
+## ###############################################################################
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'dplyr'
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:xts':
+## 
+##     first, last
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:stats':
+## 
+##     filter, lag
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:base':
+## 
+##     intersect, setdiff, setequal, union
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(purrr)}
+\FunctionTok{library}\NormalTok{(fitdistrplus)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Loading required package: MASS
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'MASS'
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:dplyr':
+## 
+##     select
+\end{verbatim}
+
+\begin{verbatim}
+## Loading required package: survival
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tibble)}
+\FunctionTok{source}\NormalTok{(}\StringTok{"optionchain.R"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Example option chain}\label{example-option-chain}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{options\_df }\OtherTok{\textless{}{-}} \FunctionTok{optionchain}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: package 'httr' was built under R version 4.4.2
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'jsonlite'
+\end{verbatim}
+
+\begin{verbatim}
+## The following object is masked from 'package:purrr':
+## 
+##     flatten
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(options\_df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##     ticker expiration type strike  ask  bid expiration_date
+## 1     GERN 2025-06-20 Call    3.0 3.78 0.43      2025-06-20
+## 2     GERN 2026-01-16 Call    5.5 0.53 0.23      2026-01-16
+## 3     GERN 2025-03-21  Put    7.0 3.93 3.28      2025-03-21
+## 4     GERN 2027-01-15 Call    7.0 0.83 0.27      2027-01-15
+## 5     GERN 2025-02-21 Call    3.5 0.48 0.22      2025-02-21
+## 6     GERN 2025-02-21 Call    4.0 0.13 0.00      2025-02-21
+## 7     GERN 2025-03-21  Put    9.0 5.96 5.44      2025-03-21
+## 8     GERN 2025-06-20  Put    3.0 0.53 0.00      2025-06-20
+## 9     GERN 2025-03-21  Put    4.5 1.42 0.93      2025-03-21
+## 10    GERN 2025-03-21  Put    2.0 2.71 0.00      2025-03-21
+## 11    GERN 2025-01-17  Put    3.0 0.08 0.03      2025-01-17
+## 12    GERN 2025-09-19 Call    2.5 4.32 0.68      2025-09-19
+## 13    GERN 2025-06-20  Put    5.0 1.93 1.47      2025-06-20
+## 14    GERN 2025-06-20 Call    5.5 0.33 0.00      2025-06-20
+## 15    GERN 2025-09-19 Call    5.0 3.48 0.00      2025-09-19
+## 16    GERN 2025-02-21  Put    3.0 0.22 0.00      2025-02-21
+## 17    GERN 2025-10-17 Call    1.5 5.02 0.18      2025-10-17
+## 18    GERN 2025-09-19  Put    3.5 1.03 0.48      2025-09-19
+## 19    GERN 2025-01-17  Put    4.5 1.42 0.00      2025-01-17
+## 20    GERN 2025-09-19 Call    1.5 4.92 1.42      2025-09-19
+## 21    GERN 2027-01-15 Call    5.0 4.92 0.77      2027-01-15
+## 22    GERN 2025-02-21  Put    6.0 2.88 2.38      2025-02-21
+## 23    GERN 2027-01-15  Put    2.5 1.43 0.00      2027-01-15
+## 24    GERN 2025-06-20  Put    1.0 0.77 0.00      2025-06-20
+## 25    GERN 2025-01-17  Put   10.0 6.92 6.59      2025-01-17
+## 26    GERN 2025-03-21 Call    2.5 3.63 0.00      2025-03-21
+## 27    GERN 2025-03-21 Call    5.0 0.08 0.00      2025-03-21
+## 28    GERN 2025-06-20  Put    5.5 2.39 0.00      2025-06-20
+## 29    GERN 2025-01-17 Call    2.0 1.57 0.00      2025-01-17
+## 30    GERN 2025-10-17 Call    5.0 3.68 0.00      2025-10-17
+## 31    GERN 2027-01-15 Call    4.0 4.55 0.98      2027-01-15
+## 32    GERN 2025-06-20 Call    1.0 5.10 0.52      2025-06-20
+## 33    GERN 2025-06-20 Call    6.0 0.23 0.00      2025-06-20
+## 34    GERN 2027-01-15  Put    4.5 2.62 0.00      2027-01-15
+## 35    GERN 2025-01-17  Put    2.0 0.12 0.00      2025-01-17
+## 36    GERN 2025-09-19  Put    1.0 0.73 0.00      2025-09-19
+## 37    GERN 2026-01-16 Call    1.0 2.62 0.00      2026-01-16
+## 38    GERN 2025-03-21  Put    8.0 4.87 4.43      2025-03-21
+## 39    GERN 2026-01-16  Put    4.0 1.52 0.98      2026-01-16
+## 40    GERN 2025-03-21  Put    6.0 2.83 2.46      2025-03-21
+## 41    GERN 2026-01-16  Put    0.5 0.48 0.00      2026-01-16
+## 42    GERN 2025-01-17 Call    3.5 0.17 0.12      2025-01-17
+## 43    GERN 2026-01-16  Put    5.0 2.30 0.00      2026-01-16
+## 44    GERN 2025-02-21  Put    7.0 3.68 3.38      2025-02-21
+## 45    GERN 2025-06-20 Call    4.0 0.38 0.27      2025-06-20
+## 46    GERN 2025-10-17  Put    2.5 0.53 0.00      2025-10-17
+## 47    GERN 2025-10-17  Put    2.0 0.43 0.00      2025-10-17
+## 48    GERN 2025-10-17 Call    3.0 4.26 0.00      2025-10-17
+## 49    GERN 2025-01-17 Call    6.0 0.08 0.00      2025-01-17
+## 50    GERN 2025-06-20  Put    3.5 0.72 0.33      2025-06-20
+## 51    GERN 2026-01-16 Call    2.0 2.16 0.00      2026-01-16
+## 52    GERN 2025-09-19 Call    4.0 3.68 0.00      2025-09-19
+## 53    GERN 2027-01-15 Call    3.0 4.98 0.00      2027-01-15
+## 54    GERN 2025-06-20 Call    2.5 4.06 0.08      2025-06-20
+## 55    GERN 2025-09-19  Put    4.0 1.37 0.00      2025-09-19
+## 56    GERN 2025-01-17  Put    1.0 0.77 0.00      2025-01-17
+## 57    GERN 2027-01-15 Call    3.5 4.83 0.23      2027-01-15
+## 58    GERN 2027-01-15  Put    1.0 1.02 0.00      2027-01-15
+## 59    GERN 2025-01-17  Put    1.5 0.73 0.00      2025-01-17
+## 60    GERN 2026-01-16 Call    3.0 1.33 1.02      2026-01-16
+## 61    GERN 2027-01-15  Put    5.5 3.24 0.00      2027-01-15
+## 62    GERN 2025-09-19  Put    0.5 3.35 0.00      2025-09-19
+## 63    GERN 2025-09-19  Put    2.0 0.43 0.00      2025-09-19
+## 64    GERN 2025-02-21  Put    2.0 0.73 0.00      2025-02-21
+## 65    GERN 2025-03-21  Put    2.5 0.17 0.00      2025-03-21
+## 66    GERN 2025-06-20  Put    1.5 0.73 0.00      2025-06-20
+## 67    GERN 2025-10-17 Call    0.5 5.28 0.52      2025-10-17
+## 68    GERN 2025-03-21 Call    4.5 0.17 0.00      2025-03-21
+## 69    GERN 2027-01-15 Call    4.5 4.87 0.48      2027-01-15
+## 70    GERN 2025-06-20 Call    2.0 4.46 1.17      2025-06-20
+## 71    GERN 2027-01-15  Put    4.0 2.22 0.00      2027-01-15
+## 72    GERN 2025-01-17  Put    6.0 2.87 2.47      2025-01-17
+## 73    GERN 2027-01-15  Put    5.0 2.91 0.00      2027-01-15
+## 74    GERN 2025-01-17  Put    0.5 0.52 0.00      2025-01-17
+## 75    GERN 2025-01-17  Put    5.5 2.38 0.00      2025-01-17
+## 76    GERN 2025-10-17  Put    1.5 1.53 0.00      2025-10-17
+## 77    GERN 2026-01-16  Put    3.5 1.08 0.68      2026-01-16
+## 78    GERN 2027-01-15 Call    1.0 4.97 0.00      2027-01-15
+## 79    GERN 2027-01-15 Call    2.5 4.92 0.12      2027-01-15
+## 80    GERN 2025-09-19 Call    3.5 0.92 0.00      2025-09-19
+## 81    GERN 2025-02-21  Put    2.5 0.22 0.00      2025-02-21
+## 82    GERN 2025-09-19  Put    5.5 2.43 1.92      2025-09-19
+## 83    GERN 2025-01-17 Call    2.5 0.98 0.72      2025-01-17
+## 84    GERN 2025-03-21  Put    4.0 0.97 0.00      2025-03-21
+## 85    GERN 2025-09-19 Call    2.0 4.82 0.98      2025-09-19
+## 86    GERN 2025-02-21 Call    1.0 3.92 0.00      2025-02-21
+## 87    GERN 2027-01-15  Put    1.5 1.12 0.00      2027-01-15
+## 88    GERN 2025-03-21  Put    3.5 0.53 0.00      2025-03-21
+## 89    GERN 2025-02-21 Call    2.5 3.45 0.67      2025-02-21
+## 90    GERN 2025-06-20  Put    6.0 2.87 2.44      2025-06-20
+## 91    GERN 2025-06-20  Put    4.0 1.22 0.00      2025-06-20
+## 92    GERN 2025-10-17  Put    4.0 1.33 0.68      2025-10-17
+## 93    GERN 2025-02-21  Put    5.5 2.49 1.88      2025-02-21
+## 94    GERN 2025-10-17  Put    3.0 0.78 0.00      2025-10-17
+## 95    GERN 2025-06-20 Call    7.0 0.77 0.00      2025-06-20
+## 96    GERN 2025-01-17 Call    7.0 0.12 0.00      2025-01-17
+## 97    GERN 2025-01-17  Put    8.0 4.92 4.48      2025-01-17
+## 98    GERN 2025-02-21  Put    3.5 0.43 0.00      2025-02-21
+## 99    GERN 2025-09-19 Call    0.5 5.38 0.48      2025-09-19
+## 100   GERN 2025-06-20 Call    1.5 4.83 0.12      2025-06-20
+## 101   GERN 2025-06-20  Put    2.0 0.33 0.00      2025-06-20
+## 102   GERN 2025-02-21  Put    1.0 0.73 0.00      2025-02-21
+## 103   GERN 2025-01-17  Put    5.0 1.93 1.52      2025-01-17
+## 104   GERN 2025-03-21 Call    8.0 0.73 0.00      2025-03-21
+## 105   GERN 2025-01-17  Put    7.0 3.86 3.54      2025-01-17
+## 106   GERN 2027-01-15 Call    1.5 5.03 0.00      2027-01-15
+## 107   GERN 2025-01-17  Put    9.0 5.84 5.48      2025-01-17
+## 108   GERN 2026-01-16 Call    3.5 0.88 0.67      2026-01-16
+## 109   GERN 2025-03-21 Call    3.5 0.42 0.27      2025-03-21
+## 110   GERN 2025-02-21 Call    6.0 0.77 0.00      2025-02-21
+## 111   GERN 2025-01-17 Call    8.0 0.38 0.00      2025-01-17
+## 112   GERN 2027-01-15 Call    5.5 5.06 0.00      2027-01-15
+## 113   GERN 2025-02-21 Call    5.0 0.03 0.00      2025-02-21
+## 114   GERN 2025-02-21  Put    4.0 0.92 0.00      2025-02-21
+## 115   GERN 2027-01-15  Put    2.0 1.22 0.00      2027-01-15
+## 116   GERN 2025-02-21  Put    1.5 0.73 0.00      2025-02-21
+## 117   GERN 2025-03-21 Call    7.0 0.77 0.00      2025-03-21
+## 118   GERN 2025-02-21 Call    4.5 0.27 0.00      2025-02-21
+## 119   GERN 2026-01-16  Put    5.5 2.59 0.00      2026-01-16
+## 120   GERN 2025-09-19 Call    1.0 5.02 1.82      2025-09-19
+## 121   GERN 2025-10-17  Put    0.5 3.42 0.00      2025-10-17
+## 122   GERN 2025-03-21  Put    5.0 2.03 0.00      2025-03-21
+## 123   GERN 2025-10-17 Call    2.0 4.93 0.08      2025-10-17
+## 124   GERN 2025-09-19  Put    1.5 1.52 0.00      2025-09-19
+## 125   GERN 2025-01-17 Call    9.0 0.73 0.00      2025-01-17
+## 126   GERN 2025-06-20  Put    4.5 1.53 0.00      2025-06-20
+## 127   GERN 2025-09-19  Put    2.5 0.57 0.00      2025-09-19
+## 128   GERN 2025-10-17  Put    1.0 0.98 0.00      2025-10-17
+## 129   GERN 2025-03-21 Call    5.5 0.32 0.00      2025-03-21
+## 130   GERN 2025-09-19 Call    4.5 3.58 0.08      2025-09-19
+## 131   GERN 2025-09-19  Put    3.0 0.73 0.00      2025-09-19
+## 132   GERN 2027-01-15  Put    3.0 1.62 0.00      2027-01-15
+## 133   GERN 2025-06-20  Put    7.0 3.98 3.42      2025-06-20
+## 134   GERN 2026-01-16  Put   10.0 7.02 6.09      2026-01-16
+## 135   GERN 2025-02-21 Call    3.0 0.77 0.28      2025-02-21
+## 136   GERN 2025-06-20 Call    3.5 0.67 0.37      2025-06-20
+## 137   GERN 2025-03-21 Call    3.0 0.82 0.47      2025-03-21
+## 138   GERN 2026-01-16 Call    4.5 0.97 0.42      2026-01-16
+## 139   GERN 2025-01-17 Call    4.0 0.12 0.03      2025-01-17
+## 140   GERN 2026-01-16  Put    1.0 1.02 0.00      2026-01-16
+## 141   GERN 2025-10-17 Call    1.0 3.55 0.42      2025-10-17
+## 142   GERN 2027-01-15  Put    3.5 1.27 0.83      2027-01-15
+## 143   GERN 2025-10-17 Call    3.5 4.08 0.00      2025-10-17
+## 144   GERN 2026-01-16 Call    0.5 5.54 0.62      2026-01-16
+## 145   GERN 2027-01-15 Call    0.5 5.48 0.52      2027-01-15
+## 146   GERN 2026-01-16  Put    2.5 0.88 0.00      2026-01-16
+## 147   GERN 2025-10-17  Put    4.5 1.67 0.00      2025-10-17
+## 148   GERN 2025-03-21 Call    2.0 4.04 0.00      2025-03-21
+## 149   GERN 2025-02-21  Put    5.0 2.79 0.00      2025-02-21
+## 150   GERN 2025-10-17 Call    4.5 3.84 0.00      2025-10-17
+## 151   GERN 2025-01-17 Call    0.5 5.08 0.72      2025-01-17
+## 152   GERN 2025-09-19  Put    5.0 2.07 0.00      2025-09-19
+## 153   GERN 2025-03-21 Call    1.5 4.57 0.78      2025-03-21
+## 154   GERN 2026-01-16  Put    1.5 0.72 0.00      2026-01-16
+## 155   GERN 2025-03-21 Call    1.0 4.96 1.17      2025-03-21
+## 156   GERN 2025-03-21  Put    1.5 0.77 0.00      2025-03-21
+## 157   GERN 2027-01-15  Put    0.5 0.48 0.00      2027-01-15
+## 158   GERN 2025-01-17  Put    4.0 0.73 0.62      2025-01-17
+## 159   GERN 2025-03-21  Put    3.0 0.42 0.07      2025-03-21
+## 160   GERN 2025-02-21 Call    7.0 0.77 0.00      2025-02-21
+## 161   GERN 2025-09-19 Call    5.5 0.47 0.00      2025-09-19
+## 162   GERN 2026-01-16 Call    4.0 0.98 0.43      2026-01-16
+## 163   GERN 2025-10-17  Put    5.5 2.57 0.00      2025-10-17
+## 164   GERN 2025-09-19  Put    4.5 1.62 0.00      2025-09-19
+## 165   GERN 2025-02-21 Call    5.5 0.73 0.00      2025-02-21
+## 166   GERN 2027-01-15 Call    2.0 4.90 0.22      2027-01-15
+## 167   GERN 2025-10-17 Call    5.5 0.52 0.12      2025-10-17
+## 168   GERN 2026-01-16  Put    2.0 0.22 0.08      2026-01-16
+## 169   GERN 2025-01-17  Put    3.5 0.28 0.22      2025-01-17
+## 170   GERN 2025-03-21 Call    9.0 0.38 0.00      2025-03-21
+## 171   GERN 2025-01-17 Call    1.0 2.63 1.97      2025-01-17
+## 172   GERN 2025-01-17 Call   10.0 0.77 0.00      2025-01-17
+## 173   GERN 2026-01-16 Call    1.5 2.33 1.72      2026-01-16
+## 174   GERN 2025-01-17 Call    3.0 0.48 0.42      2025-01-17
+## 175   GERN 2025-01-17 Call    5.0 0.07 0.00      2025-01-17
+## 176   GERN 2027-01-15  Put    7.0 4.62 2.60      2027-01-15
+## 177   GERN 2025-01-17 Call    5.5 0.03 0.00      2025-01-17
+## 178   GERN 2025-10-17  Put    3.5 1.07 0.62      2025-10-17
+## 179   GERN 2025-02-21  Put    4.5 1.92 0.00      2025-02-21
+## 180   GERN 2025-03-21 Call    6.0 0.08 0.00      2025-03-21
+## 181   GERN 2025-10-17 Call    2.5 4.54 0.00      2025-10-17
+## 182   GERN 2026-01-16  Put    4.5 1.67 0.00      2026-01-16
+## 183   GERN 2025-03-21  Put    1.0 0.77 0.00      2025-03-21
+## 184   GERN 2026-01-16 Call    5.0 0.58 0.33      2026-01-16
+## 185   GERN 2025-06-20  Put    2.5 0.43 0.00      2025-06-20
+## 186   GERN 2025-01-17 Call    1.5 2.03 1.67      2025-01-17
+## 187   GERN 2025-01-17 Call    4.5 0.12 0.00      2025-01-17
+## 188   GERN 2026-01-16  Put    3.0 0.58 0.00      2026-01-16
+## 189   GERN 2025-01-17  Put    2.5 0.08 0.00      2025-01-17
+## 190   GERN 2025-10-17 Call    4.0 3.88 0.23      2025-10-17
+## 191   GERN 2025-06-20 Call    5.0 0.33 0.00      2025-06-20
+## 192   GERN 2026-01-16  Put    7.0 3.95 3.64      2026-01-16
+## 193   GERN 2025-06-20 Call    4.5 0.37 0.00      2025-06-20
+## 194   GERN 2025-10-17  Put    5.0 1.93 1.67      2025-10-17
+## 195   GERN 2026-01-16 Call    2.5 4.92 0.00      2026-01-16
+## 196   GERN 2025-02-21 Call    2.0 3.87 0.00      2025-02-21
+## 197   GERN 2025-09-19 Call    3.0 4.14 0.38      2025-09-19
+## 198   GERN 2025-03-21  Put    5.5 2.33 1.92      2025-03-21
+## 199   GERN 2026-01-16 Call    7.0 0.22 0.00      2026-01-16
+## 200   GERN 2025-02-21 Call    1.5 4.37 0.52      2025-02-21
+## 201   GERN 2025-03-21 Call    4.0 0.32 0.13      2025-03-21
+## 202   GERN 2026-01-16 Call   10.0 0.22 0.12      2026-01-16
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{getSymbols}\NormalTok{(}\StringTok{"GERN"}\NormalTok{, }\AttributeTok{from=}\StringTok{"2019{-}01{-}01"}\NormalTok{, }\AttributeTok{to=}\StringTok{"2024{-}12{-}29"}\NormalTok{)  }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "GERN"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{prices }\OtherTok{\textless{}{-}} \FunctionTok{Cl}\NormalTok{(GERN)}
+
+\CommentTok{\#Compute daily log returns}
+\NormalTok{returns }\OtherTok{\textless{}{-}} \FunctionTok{diff}\NormalTok{(}\FunctionTok{log}\NormalTok{(prices))[}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{]  }
+\FunctionTok{print}\NormalTok{(returns)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##              GERN.Close
+## 2019-01-03  0.009569442
+## 2019-01-04  0.046520083
+## 2019-01-07  0.070204193
+## 2019-01-08 -0.025752472
+## 2019-01-09  0.017241790
+## 2019-01-10  0.008510682
+## 2019-01-11  0.016807203
+## 2019-01-14 -0.096143870
+## 2019-01-15 -0.046957050
+## 2019-01-16  0.046957050
+##        ...             
+## 2024-12-13 -0.015424517
+## 2024-12-16 -0.013037982
+## 2024-12-17  0.031010269
+## 2024-12-18 -0.041564446
+## 2024-12-19 -0.029611826
+## 2024-12-20 -0.047561432
+## 2024-12-23 -0.043930958
+## 2024-12-24  0.000000000
+## 2024-12-26 -0.012048327
+## 2024-12-27  0.015037863
+\end{verbatim}
+
+\section{calibrate parameters for
+model}\label{calibrate-parameters-for-model}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sd\_ret }\OtherTok{\textless{}{-}} \FunctionTok{sd}\NormalTok{(returns, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{threshold }\OtherTok{\textless{}{-}} \DecValTok{3} \SpecialCharTok{*}\NormalTok{ sd\_ret}
+
+\NormalTok{jumps }\OtherTok{\textless{}{-}}\NormalTok{ returns[}\FunctionTok{abs}\NormalTok{(returns) }\SpecialCharTok{\textgreater{}}\NormalTok{ threshold]}
+\NormalTok{no\_jumps }\OtherTok{\textless{}{-}}\NormalTok{ returns[}\FunctionTok{abs}\NormalTok{(returns) }\SpecialCharTok{\textless{}=}\NormalTok{ threshold]}
+
+\NormalTok{fit\_jump }\OtherTok{\textless{}{-}}\NormalTok{ fitdistrplus}\SpecialCharTok{::}\FunctionTok{fitdist}\NormalTok{(}\FunctionTok{as.numeric}\NormalTok{(jumps), }\StringTok{"norm"}\NormalTok{)}
+\NormalTok{mu\_jump }\OtherTok{\textless{}{-}}\NormalTok{ fit\_jump}\SpecialCharTok{$}\NormalTok{estimate[}\DecValTok{1}\NormalTok{]}
+\NormalTok{sigma\_jump }\OtherTok{\textless{}{-}}\NormalTok{ fit\_jump}\SpecialCharTok{$}\NormalTok{estimate[}\DecValTok{2}\NormalTok{]}
+
+\NormalTok{lambda }\OtherTok{\textless{}{-}} \FunctionTok{length}\NormalTok{(jumps)}\SpecialCharTok{/}\FunctionTok{length}\NormalTok{(returns)}
+
+\NormalTok{sigma }\OtherTok{\textless{}{-}} \FunctionTok{sd}\NormalTok{(no\_jumps, }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+
+
+\FunctionTok{print}\NormalTok{(}\FunctionTok{c}\NormalTok{(mu\_jump, sigma\_jump, }\StringTok{"sd no jump"} \OtherTok{=}\NormalTok{ sigma, }\StringTok{"lambda"} \OtherTok{=}\NormalTok{lambda))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##       mean         sd sd no jump     lambda 
+## 0.13469282 0.19035038 0.03710788 0.01327140
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Standard Black{-}Scholes (European) for a call:}
+\NormalTok{BS\_call\_price }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(S, K, T, r, }\AttributeTok{q=}\DecValTok{0}\NormalTok{, sigma) \{}
+  \ControlFlowTok{if}\NormalTok{(T }\SpecialCharTok{\textless{}=} \DecValTok{0}\NormalTok{) }\FunctionTok{return}\NormalTok{(}\FunctionTok{pmax}\NormalTok{(S }\SpecialCharTok{{-}}\NormalTok{ K, }\DecValTok{0}\NormalTok{))}
+\NormalTok{  d1 }\OtherTok{\textless{}{-}}\NormalTok{ (}\FunctionTok{log}\NormalTok{(S}\SpecialCharTok{/}\NormalTok{K) }\SpecialCharTok{+}\NormalTok{ (r }\SpecialCharTok{{-}}\NormalTok{ q }\SpecialCharTok{+} \FloatTok{0.5}\SpecialCharTok{*}\NormalTok{sigma}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{)}\SpecialCharTok{*}\NormalTok{T)}\SpecialCharTok{/}\NormalTok{(sigma}\SpecialCharTok{*}\FunctionTok{sqrt}\NormalTok{(T))}
+\NormalTok{  d2 }\OtherTok{\textless{}{-}}\NormalTok{ d1 }\SpecialCharTok{{-}}\NormalTok{ sigma}\SpecialCharTok{*}\FunctionTok{sqrt}\NormalTok{(T)}
+\NormalTok{  call }\OtherTok{\textless{}{-}}\NormalTok{ S}\SpecialCharTok{*}\FunctionTok{exp}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{q}\SpecialCharTok{*}\NormalTok{T)}\SpecialCharTok{*}\FunctionTok{pnorm}\NormalTok{(d1) }\SpecialCharTok{{-}}\NormalTok{ K}\SpecialCharTok{*}\FunctionTok{exp}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{r}\SpecialCharTok{*}\NormalTok{T)}\SpecialCharTok{*}\FunctionTok{pnorm}\NormalTok{(d2)}
+  \FunctionTok{return}\NormalTok{(call)}
+\NormalTok{\}}
+
+\CommentTok{\# Merton\textquotesingle{}s jump{-}diffusion call}
+\NormalTok{merton\_call\_price }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(}
+\NormalTok{  S0, K, T, r, q, sigma,  }\CommentTok{\# continuous vol}
+\NormalTok{  lambda, muJ, sigmaJ,    }\CommentTok{\# jump intensity \& jump dist parameters}
+  \AttributeTok{max\_terms=}\DecValTok{50}
+\NormalTok{) \{}
+  \CommentTok{\# Summation over k jumps}
+\NormalTok{  sumval }\OtherTok{\textless{}{-}} \DecValTok{0}
+  \CommentTok{\# e\^{}{-}lambdaT factor}
+\NormalTok{  e\_negLT }\OtherTok{\textless{}{-}} \FunctionTok{exp}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{lambda }\SpecialCharTok{*}\NormalTok{ T)}
+  
+  \ControlFlowTok{for}\NormalTok{(k }\ControlFlowTok{in} \DecValTok{0}\SpecialCharTok{:}\NormalTok{max\_terms) \{}
+    \CommentTok{\# Poisson weight}
+\NormalTok{    w\_k }\OtherTok{\textless{}{-}}\NormalTok{ e\_negLT }\SpecialCharTok{*}\NormalTok{ ((lambda}\SpecialCharTok{*}\NormalTok{T)}\SpecialCharTok{\^{}}\NormalTok{k }\SpecialCharTok{/} \FunctionTok{factorial}\NormalTok{(k))}
+    
+    \CommentTok{\# Shifted underlying for k jumps:}
+    \CommentTok{\# Often: S\_k = S0 * exp(k * muJ)}
+    \CommentTok{\# Some references include correction factors (e.g. {-}0.5*sigmaJ\^{}2*k),}
+    \CommentTok{\# but let\textquotesingle{}s keep the simpler standard form:}
+\NormalTok{    S\_k }\OtherTok{\textless{}{-}}\NormalTok{ S0 }\SpecialCharTok{*} \FunctionTok{exp}\NormalTok{(k }\SpecialCharTok{*}\NormalTok{ muJ)}
+    
+    \CommentTok{\# Price a vanilla call using BS with the same sigma. }
+    \CommentTok{\# (In some derivations you modify sigma =\textgreater{} but let\textquotesingle{}s keep it simple.)}
+\NormalTok{    call\_k }\OtherTok{\textless{}{-}} \FunctionTok{BS\_call\_price}\NormalTok{(S\_k, K, T, r, q, sigma)}
+    
+\NormalTok{    sumval }\OtherTok{\textless{}{-}}\NormalTok{ sumval }\SpecialCharTok{+}\NormalTok{ w\_k }\SpecialCharTok{*}\NormalTok{ call\_k}
+\NormalTok{  \}}
+  
+  \FunctionTok{return}\NormalTok{(sumval)}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{options\_df }\OtherTok{\textless{}{-}} \FunctionTok{optionchain}\NormalTok{()}
+
+
+\FunctionTok{na.omit}\NormalTok{(}\FunctionTok{optionchain}\NormalTok{())}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##     ticker expiration type strike  ask  bid expiration_date
+## 1     GERN 2027-01-15  Put    4.0 2.22 0.00      2027-01-15
+## 2     GERN 2025-09-19  Put    2.5 0.57 0.00      2025-09-19
+## 3     GERN 2025-06-20  Put    1.0 0.77 0.00      2025-06-20
+## 4     GERN 2025-02-21 Call    2.5 3.45 0.67      2025-02-21
+## 5     GERN 2025-10-17 Call    1.5 5.02 0.18      2025-10-17
+## 6     GERN 2026-01-16 Call    4.0 0.98 0.43      2026-01-16
+## 7     GERN 2027-01-15  Put    3.5 1.27 0.83      2027-01-15
+## 8     GERN 2025-01-17  Put    2.0 0.12 0.00      2025-01-17
+## 9     GERN 2027-01-15  Put    2.0 1.22 0.00      2027-01-15
+## 10    GERN 2025-10-17  Put    3.0 0.78 0.00      2025-10-17
+## 11    GERN 2025-03-21 Call    5.0 0.08 0.00      2025-03-21
+## 12    GERN 2025-02-21 Call    1.0 3.92 0.00      2025-02-21
+## 13    GERN 2025-06-20 Call    1.5 4.83 0.12      2025-06-20
+## 14    GERN 2025-03-21 Call    1.5 4.57 0.78      2025-03-21
+## 15    GERN 2025-10-17  Put    2.5 0.53 0.00      2025-10-17
+## 16    GERN 2025-03-21 Call    4.0 0.32 0.13      2025-03-21
+## 17    GERN 2027-01-15 Call    7.0 0.83 0.27      2027-01-15
+## 18    GERN 2026-01-16  Put    1.0 1.02 0.00      2026-01-16
+## 19    GERN 2025-02-21 Call    5.0 0.03 0.00      2025-02-21
+## 20    GERN 2027-01-15 Call    2.0 4.90 0.22      2027-01-15
+## 21    GERN 2025-02-21 Call    4.5 0.27 0.00      2025-02-21
+## 22    GERN 2025-01-17  Put    0.5 0.52 0.00      2025-01-17
+## 23    GERN 2025-01-17 Call    9.0 0.73 0.00      2025-01-17
+## 24    GERN 2026-01-16  Put    2.5 0.88 0.00      2026-01-16
+## 25    GERN 2025-03-21  Put    3.5 0.53 0.00      2025-03-21
+## 26    GERN 2025-01-17 Call    4.5 0.12 0.00      2025-01-17
+## 27    GERN 2026-01-16 Call    2.0 2.16 0.00      2026-01-16
+## 28    GERN 2025-01-17 Call    7.0 0.12 0.00      2025-01-17
+## 29    GERN 2025-03-21 Call    9.0 0.38 0.00      2025-03-21
+## 30    GERN 2025-02-21 Call    6.0 0.77 0.00      2025-02-21
+## 31    GERN 2027-01-15  Put    1.5 1.12 0.00      2027-01-15
+## 32    GERN 2025-10-17  Put    5.0 1.93 1.67      2025-10-17
+## 33    GERN 2025-03-21  Put    8.0 4.87 4.43      2025-03-21
+## 34    GERN 2025-06-20  Put    3.0 0.53 0.00      2025-06-20
+## 35    GERN 2027-01-15 Call    3.0 4.98 0.00      2027-01-15
+## 36    GERN 2025-01-17 Call    2.5 0.98 0.72      2025-01-17
+## 37    GERN 2025-03-21 Call    6.0 0.08 0.00      2025-03-21
+## 38    GERN 2025-01-17  Put    4.5 1.42 0.00      2025-01-17
+## 39    GERN 2025-03-21  Put    5.5 2.33 1.92      2025-03-21
+## 40    GERN 2025-06-20 Call    5.5 0.33 0.00      2025-06-20
+## 41    GERN 2026-01-16 Call    4.5 0.97 0.42      2026-01-16
+## 42    GERN 2025-10-17  Put    5.5 2.57 0.00      2025-10-17
+## 43    GERN 2025-09-19 Call    5.0 3.48 0.00      2025-09-19
+## 44    GERN 2026-01-16  Put    3.0 0.58 0.00      2026-01-16
+## 45    GERN 2025-01-17 Call    6.0 0.08 0.00      2025-01-17
+## 46    GERN 2025-02-21  Put    6.0 2.88 2.38      2025-02-21
+## 47    GERN 2025-06-20  Put    6.0 2.87 2.44      2025-06-20
+## 48    GERN 2025-03-21  Put    1.5 0.77 0.00      2025-03-21
+## 49    GERN 2025-02-21 Call    7.0 0.77 0.00      2025-02-21
+## 50    GERN 2025-02-21  Put    5.0 2.79 0.00      2025-02-21
+## 51    GERN 2026-01-16  Put    2.0 0.22 0.08      2026-01-16
+## 52    GERN 2025-10-17 Call    3.5 4.08 0.00      2025-10-17
+## 53    GERN 2025-09-19 Call    5.5 0.47 0.00      2025-09-19
+## 54    GERN 2025-09-19  Put    4.5 1.62 0.00      2025-09-19
+## 55    GERN 2025-10-17 Call    4.0 3.88 0.23      2025-10-17
+## 56    GERN 2025-01-17  Put    8.0 4.92 4.48      2025-01-17
+## 57    GERN 2025-09-19 Call    1.0 5.02 1.82      2025-09-19
+## 58    GERN 2025-02-21  Put    4.0 0.92 0.00      2025-02-21
+## 59    GERN 2025-03-21  Put    9.0 5.96 5.44      2025-03-21
+## 60    GERN 2025-06-20  Put    7.0 3.98 3.42      2025-06-20
+## 61    GERN 2027-01-15  Put    0.5 0.48 0.00      2027-01-15
+## 62    GERN 2025-03-21  Put    4.0 0.97 0.00      2025-03-21
+## 63    GERN 2025-03-21  Put    6.0 2.83 2.46      2025-03-21
+## 64    GERN 2025-09-19 Call    4.5 3.58 0.08      2025-09-19
+## 65    GERN 2027-01-15  Put    1.0 1.02 0.00      2027-01-15
+## 66    GERN 2025-09-19  Put    4.0 1.37 0.00      2025-09-19
+## 67    GERN 2027-01-15 Call    3.5 4.83 0.23      2027-01-15
+## 68    GERN 2025-06-20 Call    7.0 0.77 0.00      2025-06-20
+## 69    GERN 2025-01-17 Call    5.0 0.07 0.00      2025-01-17
+## 70    GERN 2025-01-17 Call    1.5 2.03 1.67      2025-01-17
+## 71    GERN 2026-01-16 Call    1.5 2.33 1.72      2026-01-16
+## 72    GERN 2026-01-16  Put    1.5 0.72 0.00      2026-01-16
+## 73    GERN 2025-06-20 Call    2.5 4.06 0.08      2025-06-20
+## 74    GERN 2025-10-17 Call    5.0 3.68 0.00      2025-10-17
+## 75    GERN 2025-02-21  Put    7.0 3.68 3.38      2025-02-21
+## 76    GERN 2025-09-19  Put    1.5 1.52 0.00      2025-09-19
+## 77    GERN 2026-01-16 Call    5.5 0.53 0.23      2026-01-16
+## 78    GERN 2025-01-17 Call    0.5 5.08 0.72      2025-01-17
+## 79    GERN 2025-03-21 Call    4.5 0.17 0.00      2025-03-21
+## 80    GERN 2027-01-15 Call    5.0 4.92 0.77      2027-01-15
+## 81    GERN 2025-06-20 Call    4.5 0.37 0.00      2025-06-20
+## 82    GERN 2025-10-17 Call    1.0 3.55 0.42      2025-10-17
+## 83    GERN 2025-01-17 Call    4.0 0.12 0.03      2025-01-17
+## 84    GERN 2027-01-15  Put    5.5 3.24 0.00      2027-01-15
+## 85    GERN 2025-02-21  Put    4.5 1.92 0.00      2025-02-21
+## 86    GERN 2025-10-17  Put    3.5 1.07 0.62      2025-10-17
+## 87    GERN 2027-01-15  Put    5.0 2.91 0.00      2027-01-15
+## 88    GERN 2025-10-17 Call    5.5 0.52 0.12      2025-10-17
+## 89    GERN 2027-01-15 Call    5.5 5.06 0.00      2027-01-15
+## 90    GERN 2025-09-19 Call    1.5 4.92 1.42      2025-09-19
+## 91    GERN 2025-10-17 Call    2.5 4.54 0.00      2025-10-17
+## 92    GERN 2025-03-21 Call    8.0 0.73 0.00      2025-03-21
+## 93    GERN 2025-03-21 Call    1.0 4.96 1.17      2025-03-21
+## 94    GERN 2027-01-15  Put    2.5 1.43 0.00      2027-01-15
+## 95    GERN 2027-01-15 Call    1.0 4.97 0.00      2027-01-15
+## 96    GERN 2025-01-17 Call    3.5 0.17 0.12      2025-01-17
+## 97    GERN 2025-01-17  Put    4.0 0.73 0.62      2025-01-17
+## 98    GERN 2027-01-15  Put    4.5 2.62 0.00      2027-01-15
+## 99    GERN 2025-01-17  Put    1.5 0.73 0.00      2025-01-17
+## 100   GERN 2025-02-21  Put    2.0 0.73 0.00      2025-02-21
+## 101   GERN 2025-02-21  Put    2.5 0.22 0.00      2025-02-21
+## 102   GERN 2025-02-21  Put    3.0 0.22 0.00      2025-02-21
+## 103   GERN 2025-03-21 Call    3.5 0.42 0.27      2025-03-21
+## 104   GERN 2025-02-21  Put    3.5 0.43 0.00      2025-02-21
+## 105   GERN 2027-01-15  Put    7.0 4.62 2.60      2027-01-15
+## 106   GERN 2026-01-16  Put    4.5 1.67 0.00      2026-01-16
+## 107   GERN 2025-03-21  Put    3.0 0.42 0.07      2025-03-21
+## 108   GERN 2026-01-16  Put    5.5 2.59 0.00      2026-01-16
+## 109   GERN 2025-10-17  Put    2.0 0.43 0.00      2025-10-17
+## 110   GERN 2025-01-17  Put    6.0 2.87 2.47      2025-01-17
+## 111   GERN 2025-06-20  Put    5.5 2.39 0.00      2025-06-20
+## 112   GERN 2025-02-21  Put    1.5 0.73 0.00      2025-02-21
+## 113   GERN 2025-09-19  Put    1.0 0.73 0.00      2025-09-19
+## 114   GERN 2026-01-16  Put    3.5 1.08 0.68      2026-01-16
+## 115   GERN 2025-09-19 Call    2.5 4.32 0.68      2025-09-19
+## 116   GERN 2025-01-17  Put    9.0 5.84 5.48      2025-01-17
+## 117   GERN 2026-01-16  Put    7.0 3.95 3.64      2026-01-16
+## 118   GERN 2025-02-21 Call    1.5 4.37 0.52      2025-02-21
+## 119   GERN 2025-02-21 Call    2.0 3.87 0.00      2025-02-21
+## 120   GERN 2025-01-17  Put    5.5 2.38 0.00      2025-01-17
+## 121   GERN 2025-09-19  Put    2.0 0.43 0.00      2025-09-19
+## 122   GERN 2025-09-19  Put    5.5 2.43 1.92      2025-09-19
+## 123   GERN 2026-01-16  Put    0.5 0.48 0.00      2026-01-16
+## 124   GERN 2025-06-20 Call    5.0 0.33 0.00      2025-06-20
+## 125   GERN 2027-01-15 Call    1.5 5.03 0.00      2027-01-15
+## 126   GERN 2025-06-20  Put    4.5 1.53 0.00      2025-06-20
+## 127   GERN 2027-01-15 Call    0.5 5.48 0.52      2027-01-15
+## 128   GERN 2025-06-20 Call    1.0 5.10 0.52      2025-06-20
+## 129   GERN 2025-06-20 Call    3.5 0.67 0.37      2025-06-20
+## 130   GERN 2026-01-16  Put    5.0 2.30 0.00      2026-01-16
+## 131   GERN 2025-03-21  Put    2.5 0.17 0.00      2025-03-21
+## 132   GERN 2025-03-21  Put    2.0 2.71 0.00      2025-03-21
+## 133   GERN 2025-06-20  Put    4.0 1.22 0.00      2025-06-20
+## 134   GERN 2025-03-21 Call    5.5 0.32 0.00      2025-03-21
+## 135   GERN 2025-03-21  Put    5.0 2.03 0.00      2025-03-21
+## 136   GERN 2027-01-15 Call    2.5 4.92 0.12      2027-01-15
+## 137   GERN 2025-06-20 Call    4.0 0.38 0.27      2025-06-20
+## 138   GERN 2026-01-16 Call    1.0 2.62 0.00      2026-01-16
+## 139   GERN 2027-01-15 Call    4.5 4.87 0.48      2027-01-15
+## 140   GERN 2026-01-16 Call    7.0 0.22 0.00      2026-01-16
+## 141   GERN 2025-01-17  Put    5.0 1.93 1.52      2025-01-17
+## 142   GERN 2025-02-21  Put    5.5 2.49 1.88      2025-02-21
+## 143   GERN 2025-10-17  Put    1.0 0.98 0.00      2025-10-17
+## 144   GERN 2026-01-16 Call    3.0 1.33 1.02      2026-01-16
+## 145   GERN 2025-03-21  Put    7.0 3.93 3.28      2025-03-21
+## 146   GERN 2025-10-17  Put    4.5 1.67 0.00      2025-10-17
+## 147   GERN 2026-01-16 Call    2.5 4.92 0.00      2026-01-16
+## 148   GERN 2025-02-21 Call    3.5 0.48 0.22      2025-02-21
+## 149   GERN 2025-01-17  Put    3.0 0.08 0.03      2025-01-17
+## 150   GERN 2026-01-16  Put    4.0 1.52 0.98      2026-01-16
+## 151   GERN 2025-01-17  Put   10.0 6.92 6.59      2025-01-17
+## 152   GERN 2025-06-20 Call    6.0 0.23 0.00      2025-06-20
+## 153   GERN 2025-09-19  Put    0.5 3.35 0.00      2025-09-19
+## 154   GERN 2025-02-21 Call    3.0 0.77 0.28      2025-02-21
+## 155   GERN 2027-01-15 Call    4.0 4.55 0.98      2027-01-15
+## 156   GERN 2025-10-17  Put    1.5 1.53 0.00      2025-10-17
+## 157   GERN 2025-03-21  Put    4.5 1.42 0.93      2025-03-21
+## 158   GERN 2026-01-16 Call    5.0 0.58 0.33      2026-01-16
+## 159   GERN 2025-02-21 Call    4.0 0.13 0.00      2025-02-21
+## 160   GERN 2026-01-16 Call   10.0 0.22 0.12      2026-01-16
+## 161   GERN 2025-06-20  Put    5.0 1.93 1.47      2025-06-20
+## 162   GERN 2025-09-19  Put    5.0 2.07 0.00      2025-09-19
+## 163   GERN 2025-09-19 Call    4.0 3.68 0.00      2025-09-19
+## 164   GERN 2025-03-21 Call    7.0 0.77 0.00      2025-03-21
+## 165   GERN 2025-01-17 Call    5.5 0.03 0.00      2025-01-17
+## 166   GERN 2025-01-17 Call    2.0 1.57 0.00      2025-01-17
+## 167   GERN 2025-06-20  Put    3.5 0.72 0.33      2025-06-20
+## 168   GERN 2025-10-17  Put    0.5 3.42 0.00      2025-10-17
+## 169   GERN 2025-09-19 Call    0.5 5.38 0.48      2025-09-19
+## 170   GERN 2025-09-19 Call    3.5 0.92 0.00      2025-09-19
+## 171   GERN 2025-06-20 Call    2.0 4.46 1.17      2025-06-20
+## 172   GERN 2025-03-21 Call    2.0 4.04 0.00      2025-03-21
+## 173   GERN 2027-01-15  Put    3.0 1.62 0.00      2027-01-15
+## 174   GERN 2026-01-16 Call    0.5 5.54 0.62      2026-01-16
+## 175   GERN 2025-03-21 Call    2.5 3.63 0.00      2025-03-21
+## 176   GERN 2026-01-16  Put   10.0 7.02 6.09      2026-01-16
+## 177   GERN 2025-09-19 Call    2.0 4.82 0.98      2025-09-19
+## 178   GERN 2025-02-21 Call    5.5 0.73 0.00      2025-02-21
+## 179   GERN 2025-06-20  Put    2.5 0.43 0.00      2025-06-20
+## 180   GERN 2025-09-19 Call    3.0 4.14 0.38      2025-09-19
+## 181   GERN 2025-10-17 Call    3.0 4.26 0.00      2025-10-17
+## 182   GERN 2025-01-17 Call    8.0 0.38 0.00      2025-01-17
+## 183   GERN 2025-01-17  Put    7.0 3.86 3.54      2025-01-17
+## 184   GERN 2025-10-17 Call    0.5 5.28 0.52      2025-10-17
+## 185   GERN 2025-09-19  Put    3.5 1.03 0.48      2025-09-19
+## 186   GERN 2025-01-17 Call   10.0 0.77 0.00      2025-01-17
+## 187   GERN 2025-10-17 Call    2.0 4.93 0.08      2025-10-17
+## 188   GERN 2025-09-19  Put    3.0 0.73 0.00      2025-09-19
+## 189   GERN 2025-10-17 Call    4.5 3.84 0.00      2025-10-17
+## 190   GERN 2025-01-17 Call    1.0 2.63 1.97      2025-01-17
+## 191   GERN 2025-01-17  Put    3.5 0.28 0.22      2025-01-17
+## 192   GERN 2026-01-16 Call    3.5 0.88 0.67      2026-01-16
+## 193   GERN 2025-03-21 Call    3.0 0.82 0.47      2025-03-21
+## 194   GERN 2025-01-17 Call    3.0 0.48 0.42      2025-01-17
+## 195   GERN 2025-06-20  Put    1.5 0.73 0.00      2025-06-20
+## 196   GERN 2025-06-20 Call    3.0 3.78 0.43      2025-06-20
+## 197   GERN 2025-06-20  Put    2.0 0.33 0.00      2025-06-20
+## 198   GERN 2025-01-17  Put    1.0 0.77 0.00      2025-01-17
+## 199   GERN 2025-10-17  Put    4.0 1.33 0.68      2025-10-17
+## 200   GERN 2025-01-17  Put    2.5 0.08 0.00      2025-01-17
+## 201   GERN 2025-03-21  Put    1.0 0.77 0.00      2025-03-21
+## 202   GERN 2025-02-21  Put    1.0 0.73 0.00      2025-02-21
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{filtered }\OtherTok{\textless{}{-}}\NormalTok{ options\_df }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(}
+\NormalTok{    expiration\_date }\SpecialCharTok{==} \FunctionTok{as.Date}\NormalTok{(}\StringTok{"2025{-}01{-}17"}\NormalTok{),}
+\NormalTok{    bid }\SpecialCharTok{!=} \DecValTok{0}\NormalTok{,}
+\NormalTok{    ask }\SpecialCharTok{!=} \DecValTok{0}
+\NormalTok{  )}
+\CommentTok{\# View the result}
+\FunctionTok{print}\NormalTok{(filtered)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    ticker expiration type strike  ask  bid expiration_date
+## 1    GERN 2025-01-17 Call    2.5 0.98 0.72      2025-01-17
+## 2    GERN 2025-01-17 Call    3.0 0.48 0.42      2025-01-17
+## 3    GERN 2025-01-17 Call    0.5 5.08 0.72      2025-01-17
+## 4    GERN 2025-01-17  Put    7.0 3.86 3.54      2025-01-17
+## 5    GERN 2025-01-17 Call    3.5 0.17 0.12      2025-01-17
+## 6    GERN 2025-01-17  Put    6.0 2.87 2.47      2025-01-17
+## 7    GERN 2025-01-17  Put    8.0 4.92 4.48      2025-01-17
+## 8    GERN 2025-01-17  Put    9.0 5.84 5.48      2025-01-17
+## 9    GERN 2025-01-17  Put   10.0 6.92 6.59      2025-01-17
+## 10   GERN 2025-01-17  Put    3.5 0.28 0.22      2025-01-17
+## 11   GERN 2025-01-17 Call    1.5 2.03 1.67      2025-01-17
+## 12   GERN 2025-01-17  Put    3.0 0.08 0.03      2025-01-17
+## 13   GERN 2025-01-17  Put    5.0 1.93 1.52      2025-01-17
+## 14   GERN 2025-01-17  Put    4.0 0.73 0.62      2025-01-17
+## 15   GERN 2025-01-17 Call    1.0 2.63 1.97      2025-01-17
+## 16   GERN 2025-01-17 Call    4.0 0.12 0.03      2025-01-17
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{today }\OtherTok{\textless{}{-}} \FunctionTok{as.Date}\NormalTok{(}\StringTok{"2024{-}12{-}29"}\NormalTok{)}
+\NormalTok{expiry }\OtherTok{\textless{}{-}} \FunctionTok{as.Date}\NormalTok{(}\StringTok{"2025{-}02{-}21"}\NormalTok{)}
+\NormalTok{T\_yr }\OtherTok{\textless{}{-}} \FunctionTok{as.numeric}\NormalTok{(expiry }\SpecialCharTok{{-}}\NormalTok{ today)}\SpecialCharTok{/}\DecValTok{365}
+\NormalTok{S0\_gern }\OtherTok{\textless{}{-}} \FunctionTok{as.numeric}\NormalTok{(}\FunctionTok{last}\NormalTok{(prices))}
+\NormalTok{r }\OtherTok{\textless{}{-}} \FloatTok{0.04}
+\NormalTok{q }\OtherTok{\textless{}{-}} \FloatTok{0.00}
+
+
+
+
+\NormalTok{stock }\OtherTok{\textless{}{-}}\NormalTok{ filtered }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}
+    \AttributeTok{mid\_price =}\NormalTok{ (ask }\SpecialCharTok{+}\NormalTok{ bid)}\SpecialCharTok{/}\DecValTok{2}\NormalTok{,}
+    \AttributeTok{merton\_theo =} \FunctionTok{map\_dbl}\NormalTok{(}
+\NormalTok{      strike,}
+      \SpecialCharTok{\textasciitilde{}} \FunctionTok{merton\_call\_price}\NormalTok{(}
+\NormalTok{        S0\_gern, .x, T\_yr, r, q,}
+\NormalTok{        sigma,}
+\NormalTok{        lambda,}
+\NormalTok{        mu\_jump,}
+\NormalTok{        sigma\_jump}
+\NormalTok{      )}
+\NormalTok{    ),}
+    \AttributeTok{mispricing =}\NormalTok{ mid\_price }\SpecialCharTok{{-}}\NormalTok{ merton\_theo}
+\NormalTok{  )}
+
+
+
+\NormalTok{mispriced }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}
+  \AttributeTok{ticker =}\NormalTok{ stock}\SpecialCharTok{$}\NormalTok{ticker,}
+  \AttributeTok{expiration =}\NormalTok{ stock}\SpecialCharTok{$}\NormalTok{expiration\_date,}
+  \AttributeTok{type =}\NormalTok{ stock}\SpecialCharTok{$}\NormalTok{type,}
+  \AttributeTok{strike =}\NormalTok{ stock}\SpecialCharTok{$}\NormalTok{strike,}
+  \AttributeTok{ask =}\NormalTok{ stock}\SpecialCharTok{$}\NormalTok{ask,}
+  \AttributeTok{bid =}\NormalTok{ stock}\SpecialCharTok{$}\NormalTok{bid,}
+  \AttributeTok{mid\_price =}\NormalTok{ stock}\SpecialCharTok{$}\NormalTok{mid\_price,}
+  \AttributeTok{model\_theoretical =}\NormalTok{ stock}\SpecialCharTok{$}\NormalTok{merton\_theo,}
+  \AttributeTok{mispricing =}\NormalTok{ stock}\SpecialCharTok{$}\NormalTok{mispricing,}
+  \AttributeTok{spread =}\NormalTok{ stock}\SpecialCharTok{$}\NormalTok{ask }\SpecialCharTok{{-}}\NormalTok{ stock}\SpecialCharTok{$}\NormalTok{bid}
+  
+\NormalTok{)}
+
+\FunctionTok{print}\NormalTok{(mispriced)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    ticker expiration type strike  ask  bid mid_price model_theoretical
+## 1    GERN 2025-01-17 Call    2.5 0.98 0.72     0.850      8.656993e-01
+## 2    GERN 2025-01-17 Call    3.0 0.48 0.42     0.450      3.686494e-01
+## 3    GERN 2025-01-17 Call    0.5 5.08 0.72     2.900      2.853899e+00
+## 4    GERN 2025-01-17  Put    7.0 3.86 3.54     3.700      4.449053e-20
+## 5    GERN 2025-01-17 Call    3.5 0.17 0.12     0.145      7.546104e-04
+## 6    GERN 2025-01-17  Put    6.0 2.87 2.47     2.670      2.072332e-16
+## 7    GERN 2025-01-17  Put    8.0 4.92 4.48     4.700      1.451408e-23
+## 8    GERN 2025-01-17  Put    9.0 5.84 5.48     5.660      7.256559e-27
+## 9    GERN 2025-01-17  Put   10.0 6.92 6.59     6.755      1.095974e-28
+## 10   GERN 2025-01-17  Put    3.5 0.28 0.22     0.250      7.546104e-04
+## 11   GERN 2025-01-17 Call    1.5 2.03 1.67     1.850      1.859799e+00
+## 12   GERN 2025-01-17  Put    3.0 0.08 0.03     0.055      3.686494e-01
+## 13   GERN 2025-01-17  Put    5.0 1.93 1.52     1.725      7.388856e-11
+## 14   GERN 2025-01-17  Put    4.0 0.73 0.62     0.675      9.628675e-07
+## 15   GERN 2025-01-17 Call    1.0 2.63 1.97     2.300      2.356849e+00
+## 16   GERN 2025-01-17 Call    4.0 0.12 0.03     0.075      9.628675e-07
+##     mispricing spread
+## 1  -0.01569925   0.26
+## 2   0.08135058   0.06
+## 3   0.04610141   4.36
+## 4   3.70000000   0.32
+## 5   0.14424539   0.05
+## 6   2.67000000   0.40
+## 7   4.70000000   0.44
+## 8   5.66000000   0.36
+## 9   6.75500000   0.33
+## 10  0.24924539   0.06
+## 11 -0.00979892   0.36
+## 12 -0.31364942   0.05
+## 13  1.72500000   0.41
+## 14  0.67499904   0.11
+## 15 -0.05684875   0.66
+## 16  0.07499904   0.09
+\end{verbatim}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{4.1 If You're Bullish on GERN}
+\end{itemize}
+
+Buy calls with negative mispricing (underpriced). Or,Sell puts with
+positive mispricing (overpriced).
+
+But watch the potential for large margin requirements if you're short
+puts without a hedge.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{4.2 If You're Bearish on GERN}
+\end{itemize}
+
+Buy puts with negative mispricing (cheap). Sell calls with positive
+mispricing (expensive).
+
+Again, short calls can have unlimited upside risk unless you do a
+covered call (own the underlying) or a call spread.
+
+\end{document}

@@ -2,7 +2,9 @@
 title: "Strategy"
 author: "Oskar Allerslev"
 date: "2024-12-29"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -52,8 +54,8 @@ print(options_df)
 
 
 ```{r}
-getSymbols("GERN", from="2019-01-01", to="2024-12-29")  
-prices <- Cl(GERN)
+getSymbols("SAN", from="2019-01-01", to="2024-12-29")  
+prices <- Cl(SAN)
 
 #Compute daily log returns
 returns <- diff(log(prices))[-1]  
@@ -193,7 +195,7 @@ mispriced <- data.frame(
 )
 
 print(mispriced)
-
+View(mispriced)
 
 ```
 
